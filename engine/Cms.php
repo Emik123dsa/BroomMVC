@@ -38,6 +38,7 @@ class Cms {
        $this->db = $this->di->get('db');
        $this->router = $this->di->get('router');
        $this->view   = $this->di->get('view');
+       $this->config = $this->di->get('config');
     }
     
     public function run() 

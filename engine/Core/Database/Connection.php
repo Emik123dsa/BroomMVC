@@ -32,7 +32,6 @@ class Connection {
  * @var array
  */
     private $config = [];
-    
 /**
  * Undocumented function
  *
@@ -50,7 +49,7 @@ class Connection {
  */
     public function connect() 
     {
-        
+
         $dsn = $this->config['driver']. ":host=". $this->config['host'] .";dbname=". $this->config['db_name'];
     
         try

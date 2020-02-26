@@ -6,7 +6,8 @@ class Config
 {
     public static function item($key, $group = 'items') 
     {
-
+        $groupsItems = static::file($group); 
+        return isset($groupsItems[$key]) ? $groupsItems[$key] : [];
     }
 
     public static function file($group) 
@@ -15,10 +16,11 @@ class Config
 
         if(file_exists($path)) 
         {
-            $items = require_once $path;
+            $items = require  $path;
              
             if (is_array($items)) 
             {
+
                 return $items;
 
             } else {

@@ -13,5 +13,5 @@ return [
     'db_password' => 'Rjyafqyvtyn15', 
     'host' => 'localhost', 
     'charset' => 'UTF8'
-]
+];
 ?>
