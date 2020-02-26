@@ -4,6 +4,7 @@ namespace Engine\Core\Database;
 
 use \PDO; 
 use \PDOException;
+use Engine\Core\Config\Config;
 
 class Connection {
 
@@ -39,6 +40,7 @@ class Connection {
  */
     public function __construct() 
     {
+        $this->config = Config::file('database');
         $this->connect();
     }
 /**
@@ -48,14 +50,14 @@ class Connection {
  */
     public function connect() 
     {
-        //$this->config['driver']. ":host=". $this->config['host'] .";dbname=". $this->config['db_name'];
-        $dsn = 'mysql:host;dbname=cms;';
-    try{ 
-        //$this->config['db_user'], $this->config['db_password'], 
-        //[PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES " . $this->config['charset']]
-
-        $this->pdo = new PDO($dsn, 'cms', 'Rjyafqyvtyn15', 
-        [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]); 
+        
+        $dsn = $this->config['driver']. ":host=". $this->config['host'] .";dbname=". $this->config['db_name'];
+    
+        try
+    { 
+        
+        $this->pdo = new PDO($dsn, $this->config['db_user'], $this->config['db_password'], 
+        [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES " . $this->config['charset']]); 
 
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
