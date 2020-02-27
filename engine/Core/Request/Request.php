@@ -51,18 +51,18 @@ class Request
 
     public function __construct()
     {
-        $this->post = $_POST; 
-        $this->get = $_GET; 
-        $this->server = $_SERVER; 
-        $this->files = $_FILES; 
-        $this->env  = $_ENV; 
-        $this->request = $_REQUEST;
-        $this->cookie = $_COOKIE;
+        $this->post     =  $_POST; 
+        $this->get      =  $_GET;  
+        $this->server   =  $_SERVER; 
+        $this->files    =  $_FILES;  
+        $this->env      =  $_ENV;  
+        $this->request  =  $_REQUEST; 
+        $this->cookie   =  $_COOKIE; 
     }
 
-    public function converToHtmlChars($operation) 
+    public function convertToHtmlChars(array $operation) 
     {
-        return isset($operation) ? \htmlspecialchars($operation) : [];
+        return htmlspecialchars($operation);
     }
     
 }

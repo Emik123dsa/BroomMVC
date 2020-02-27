@@ -45,6 +45,7 @@ abstract class Controller
      *
      * @param DI $di
      */
+    protected $auth; 
     public function __construct(DI $di) 
     {
         $this->di = $di;
@@ -53,6 +54,7 @@ abstract class Controller
         $this->view = $this->di->get('view');
         $this->config = $this->di->get('config');
         $this->request = $this->di->get('request');
+        $this->auth = $this->di->get('auth');
     }
 }
 

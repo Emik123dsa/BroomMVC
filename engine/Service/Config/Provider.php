@@ -25,6 +25,7 @@ class Provider extends AbstractProvider
         
         $data['main'] = Config::file('main');
         $data['database'] = Config::file('database');
+        
         $this->di->set($this->serviceName, $data);
         
     }

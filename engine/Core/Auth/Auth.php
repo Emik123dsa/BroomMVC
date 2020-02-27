@@ -1,41 +1,59 @@
 <?php
 
 namespace Engine\Core\Auth; 
-use Engine\Core\Helper\Cookie; 
-use Engine\Core\Auth\AuthInterface\AuthInterface;
+use Engine\Helper\Cookie; 
+use Engine\Core\Auth\AuthInterface;
 
 class Auth implements AuthInterface 
 {
     protected $authed = false; 
 
-    protected $user; 
-
+    protected $hashUser; 
+    /**
+     * embed an user into session
+     *
+     * @return void
+     */
     public function authed() 
     {
         return $this->authed;
     }
-
-    public function user() 
+    /**
+     * recieve and retrieve cookies as a hash for signed user
+     *
+     * @return void
+     */
+    public function hashUser() 
     {
-        return $this->user;
+        return Cookie::get($this->hashUser);
     }
-
-    public function auth($user) 
+    /**
+     * auth for user
+     *
+     * @param [type] $hashUser
+     * @return void
+     */
+    public function auth($hashUser) 
     {
-        Cookie::set('auth.signin', true); 
-        Cookie::set('auth.user', $user);
+        Cookie::set('auth_signin', true); 
+        Cookie::set('auth_user', $hashUser);
 
         $this->authed = true; 
-        $this->user   = $user;
-
+        $this->hashUser   = $hashUser;
+    
     }
+    /**
+     * expired for cookies
+     *
+     * @return void
+     */
     public function expired() 
     {
-    Cookie::expires('auth.signin'); 
-    Cookie::expires('auth.user');
+    Cookie::delete('auth_signin'); 
+    Cookie::delete('auth_hashUser');
 
     $this->authed = false; 
-    $this->user   = null;
+    $this->hashUser   = null;
 
     }
     

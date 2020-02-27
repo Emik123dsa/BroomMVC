@@ -1,21 +1,21 @@
 <?php 
 
-namespace Engine\Core\Auth\AuthInterface; 
-
+namespace Engine\Core\Auth; 
+use Engine\Helper\Cookie; 
 interface AuthInterface 
 {
     
     public function authed();
 
-    public function user(); 
+    public function hashUser(); 
 
-    public function auth($user);
+    public function auth($hashUser);
 
     public function expired(); 
     
     public static function salt();
 
-    public static function encrypt();
+    public static function encrypt($password);
 
 }
 

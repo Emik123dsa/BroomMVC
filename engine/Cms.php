@@ -49,6 +49,7 @@ class Cms {
      *
      * @param [type] $di
      */
+    public $auth;
 /**
  * class Constuctor
  *
@@ -63,11 +64,13 @@ class Cms {
        $this->view   = $this->di->get('view');
        $this->config = $this->di->get('config');
        $this->request = $this->di->get('request');
+       $this->auth = $this->di->get('auth');
     }
     
     public function run() 
     {
         try {
+
         require_once ROOT_DIR. '/' . mb_strtolower(ENV)."/Route.php";
 
         $routerDispatch = $this->router->dispatch(Common::getMethod(), Common::getUrl());
@@ -77,9 +80,9 @@ class Cms {
             $routerDispatch = new DispatchedRoute('ErrorController:error404');
 
         }
-
+        
         list($class, $action) = explode(':', $routerDispatch->getController(), 2);
-
+        
         $controller = '\\'. ENV .'\\Controller\\' . $class;
         
         $parameters = $routerDispatch->getParameters();

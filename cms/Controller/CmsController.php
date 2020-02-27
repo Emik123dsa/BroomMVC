@@ -6,6 +6,11 @@ use Engine\Controller;
 
 class CmsController extends Controller 
 {
+    /**
+     * controller in the entity cms
+     *
+     * @param $di
+     */
     public function __construct($di)
     {
         parent::__construct($di);

@@ -12,9 +12,9 @@ class HomeController extends CmsController
      */
     public function index() 
     {
-       var_dump($this->request->get);
-    
+       
        $this->view->render('index');
+       
     }
     
 }
