@@ -35,6 +35,12 @@ abstract class Controller
      */
     protected $config;
     /**
+     * request
+     *
+     * @var [type]
+     */
+    protected $request; 
+    /**
      * construct
      *
      * @param DI $di
@@ -46,6 +52,7 @@ abstract class Controller
         $this->router = $this->di->get('router');
         $this->view = $this->di->get('view');
         $this->config = $this->di->get('config');
+        $this->request = $this->di->get('request');
     }
 }
 

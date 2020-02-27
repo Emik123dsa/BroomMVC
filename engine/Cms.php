@@ -26,11 +26,34 @@ class Cms {
  * @var [type]
  */
     public $router;
+    /**
+     * request
+     *
+     * @var [type]
+     */
+    public $request;
+    /**
+     * config
+     *
+     * @var [type]
+     */ 
+    public $config;
+    /**
+     * config
+     *
+     * @var [type]
+     */
+    public $view;
+    /**
+     * view
+     *
+     * @param [type] $di
+     */
 /**
  * class Constuctor
  *
  * @param [type] $di
- */
+ */ 
 
     public function __construct($di)
     {
@@ -39,6 +62,7 @@ class Cms {
        $this->router = $this->di->get('router');
        $this->view   = $this->di->get('view');
        $this->config = $this->di->get('config');
+       $this->request = $this->di->get('request');
     }
     
     public function run() 
