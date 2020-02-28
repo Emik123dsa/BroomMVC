@@ -9,6 +9,31 @@ class Theme
         'footer' => 'footer-%s.php', 
         'sidebar' => 'sidebar-%s.php'
     ];
+    const THEME_MASK = '%s/content/themes/%s'; 
+
+    protected static $data = []; 
+
+    protected static $url = '';
+    
+    public $asset;
+
+    public $theme;
+
+    public function __construct()
+    {
+        $this->asset = new Asset();
+        $this->theme = $this;
+    }
+
+    public static function getData() 
+    {
+        return static::$data;
+    }
+
+    public static function setData($data) 
+    {
+        static::$data = $data;
+    }
 
     public function header($template = null) 
     {

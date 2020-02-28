@@ -2,6 +2,8 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+define('DS', DIRECTORY_SEPARATOR);
+
 use Engine\Cms;
 use Engine\DI\DI;
 
