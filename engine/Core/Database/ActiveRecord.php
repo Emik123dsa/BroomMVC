@@ -26,14 +26,14 @@ trait ActiveRecord
      */
     public function __construct($id = 0) 
     {
-
         global $di;
+        
+        //$this->db = $di->get('db');
         $this->db = $di->get('db');
-
         $this->sqlClaim = new SqlClaim(); 
 
         if ($id) {
-            $this->setId($di);
+            $this->setId($id);
         }
         
     }
@@ -53,14 +53,18 @@ trait ActiveRecord
      */
     public function save() 
     {
+       
         $properties = $this->getIssetProperties(); 
         try {
         if (isset($this->id)) {
+
             $this->db->execute($this->sqlClaim
             ->update($this->getTable())
             ->set($properties)
             ->where('id', $this->id)
             ->sql(), $this->sqlClaim->values);
+
+            
 
         } else {
             $this->db->execute($this->sqlClaim
@@ -94,7 +98,7 @@ trait ActiveRecord
     private function getProperties() 
     {
         $reflection = new ReflectionClass($this);
-        $properties = $reflection->getProperties(ReflectionProperty::IS_PUBLIC); 
+        $properties = $reflection->getProperties(ReflectionProperty::IS_PUBLIC);
         return $properties;
     }
 

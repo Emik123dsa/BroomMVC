@@ -96,9 +96,9 @@ class Connection {
         try {
 
             $this->statement = $this->pdo->prepare($sql);
-
+            
             return $this->statement->execute($params);
-
+            
         } catch (PDOException $e) {
             echo $e->getMessage();
 

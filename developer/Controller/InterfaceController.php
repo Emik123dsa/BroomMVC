@@ -11,7 +11,9 @@ class InterfaceController extends DeveloperController
         
         $this->data['users'] = $this->model->user->getUsers();
 
-        $this->view->render('login', $this->data);
+        $this->model->user->updateUser();
+
+        $this->view->render('developer', $this->data);
     }
 
 }

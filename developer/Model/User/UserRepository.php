@@ -17,6 +17,14 @@ class UserRepository extends Model
         return $this->db->query($sql, $this->sqlClaim->values);
     }
 
+    public function updateUser() 
+    {
+        $user = new User(1);
+        $user->setEmail('emil.shari87@gmail.com');
+        $user->save(); 
+
+    }
+
 }
 
 
