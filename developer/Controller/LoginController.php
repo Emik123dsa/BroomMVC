@@ -2,30 +2,34 @@
 
 namespace Developer\Controller;
 
+use Engine\Controller;
 
-use Engine\Core\Auth\Auth;
-class LoginController extends DeveloperController 
+class LoginController extends Controller
 {
 
-    public function loginInterface() 
+    public function __construct($di)
     {
-        
-        $this->auth->auth('5'); 
-        
-        if (!$this->auth->authed()) {
+        parent::__construct($di);
 
-            header('Location: login/', true, 301); 
+        if ($this->auth->hashUser() !== null) {
+
+            header('Location: /developer/', true, 301);
+
             exit;
+        }       
 
-        }
-        
-        echo 'HELLO!';
     }
 
-    public function login() 
+    public function loginRender() 
+    {
+        
+        $this->view->render('login');
+    }
+
+    public function loginAjax() 
     {   
-       
-        echo 'LOGIN';
+        
+
     }
 
 }

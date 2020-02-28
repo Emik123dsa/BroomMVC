@@ -21,7 +21,8 @@ class View
      */
     public function render($template, $vars = []) 
     {
-       $pathUrl = ROOT_DIR . '/content/themes/default/' . $template . '.php';
+       $pathUrl = $this->entityDetermine($template);
+       
        if (is_file($pathUrl)) 
        {
 
@@ -47,6 +48,24 @@ class View
             throw new \Exception(sprintf("This file is not being an available - %s", $template, $pathUrl));
         }
         
+    }
+
+    public function entityDetermine($template) 
+    {
+        switch(ENV) {
+            case 'Cms': 
+                $entity = ROOT_DIR . '/content/themes/default/' . $template . '.php';
+                return $entity; 
+            break;
+
+            case 'Developer': 
+                $entity = ROOT_DIR . '/developer/View/' . $template . '.php';
+                return $entity;
+            break;
+
+            default: 
+        break;
+        }
     }
 }
 

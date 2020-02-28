@@ -2,6 +2,8 @@
 
 namespace Engine\Helper; 
 
+define('COOKIE_LIVE', 60*60*24*365);
+define('COOKIE_DIE', NULL);
 class Cookie 
 {
     /**
@@ -12,7 +14,7 @@ class Cookie
      * @param integer $time
      * @return void
      */
-    public static function set($cookie, $value, $time = 3600) 
+    public static function set($cookie, $value, $time = COOKIE_LIVE) 
     {
         setcookie($cookie, $value, time() + $time, '/');
     }
@@ -33,10 +35,10 @@ class Cookie
      * @param integer $time
      * @return void
      */
-    public static function delete($cookie, $time = 3600) 
+    public static function delete($cookie, $time = COOKIE_LIVE) 
     {
         if (isset($_COOKIE[$cookie])) {
-            self::set($cookie, null, -$time); 
+            self::set($cookie, null, time()-$time, '/'); 
             unset($_COOKIE[$cookie]);
         }
     }

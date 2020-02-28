@@ -53,7 +53,7 @@ class Connection {
         $dsn = $this->config['driver']. ":host=". $this->config['host'] .";dbname=". $this->config['db_name'];
     
         try
-    { 
+        { 
         
         $this->pdo = new PDO($dsn, $this->config['db_user'], $this->config['db_password'], 
         [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES " . $this->config['charset']]); 
@@ -78,7 +78,6 @@ class Connection {
  */
     public function close() 
     {
-       
         $this->pdo = null;
     }
 /**
@@ -88,7 +87,7 @@ class Connection {
  * @param array $params
  * @return void
  */
-    private function execute($sql) 
+    public function execute($sql, $params = []) 
     {
         if (!$this->isConnected) {
             $this->connect();
@@ -98,10 +97,13 @@ class Connection {
 
             $this->statement = $this->pdo->prepare($sql);
 
-            return $this->statement->execute();
+            return $this->statement->execute($params);
 
         } catch (PDOException $e) {
             echo $e->getMessage();
+
+            $this->close();
+
             exit;
         }
         
@@ -115,18 +117,18 @@ class Connection {
  * @param [type] $mode
  * @return void
  */
-    public function query($sql, $mode = PDO::FETCH_ASSOC)
+    public function query($sql, $params = [], $mode = PDO::FETCH_ASSOC)
     {
         $sql = trim(str_replace('\r', ' ', $sql));
        
-        $this->execute($sql); 
+        $this->execute($sql, $params); 
         
-        $rowStatement = explode(" ", preg_replace("/\s+|\t+|\n+/", " ", $sql));
-        
-        $this->statement = strtolower($rowStatement[0]); 
+        //$rowStatement = explode(" ", preg_replace("/\s+|\t+|\n+/", " ", $sql));
+        //$this->statement = array(strtolower($rowStatement[0])); 
         
         return $this->statement->fetchAll($mode);
-    
+
+        $this->close();
     }
 /**
  * lastInsertId
@@ -136,6 +138,7 @@ class Connection {
     public function lastInsertId() 
     {
         $this->pdo->lastInsertId();
+        $this->close();
     }
 
 }

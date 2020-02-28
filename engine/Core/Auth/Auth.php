@@ -25,7 +25,7 @@ class Auth implements AuthInterface
      */
     public function hashUser() 
     {
-        return Cookie::get($this->hashUser);
+        return Cookie::get('auth_user');
     }
     /**
      * auth for user
@@ -34,9 +34,9 @@ class Auth implements AuthInterface
      * @return void
      */
     public function auth($hashUser) 
-    {
-        Cookie::set('auth_signin', true); 
-        Cookie::set('auth_user', $hashUser);
+    {    
+        Cookie::set('auth_user', true); 
+        Cookie::set('auth_hashUser', $hashUser);
 
         $this->authed = true; 
         $this->hashUser   = $hashUser;
@@ -49,7 +49,7 @@ class Auth implements AuthInterface
      */
     public function expired() 
     {
-    Cookie::delete('auth_signin'); 
+    Cookie::delete('auth_user'); 
     Cookie::delete('auth_hashUser');
 
     $this->authed = false; 
