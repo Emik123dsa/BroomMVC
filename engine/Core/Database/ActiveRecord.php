@@ -29,7 +29,7 @@ trait ActiveRecord
 
         global $di;
         $this->db = $di->get('db');
-        
+
         $this->sqlClaim = new SqlClaim(); 
 
         if ($id) {
@@ -93,7 +93,7 @@ trait ActiveRecord
 
     private function getProperties() 
     {
-        $reflection = new \ReflectionClass($this);
+        $reflection = new ReflectionClass($this);
         $properties = $reflection->getProperties(ReflectionProperty::IS_PUBLIC); 
         return $properties;
     }
