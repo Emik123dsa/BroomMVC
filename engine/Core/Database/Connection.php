@@ -8,47 +8,47 @@ use Engine\Core\Config\Config;
 
 class Connection {
 
-/**
- * Undocumented variable
- *
- * @var [type]
- */
-    private $pdo; 
-/**
- * Undocumented variable
- *
- * @var [type]
- */
-    private $isConnected;
-/**
- * Undocumented variable
- *
- * @var [type]
- */
-    private $statement;
-/**
- * Undocumented variable
- *
- * @var array
- */
-    private $config = [];
-/**
- * Undocumented function
- *
- * @param array $config
- */
-    public function __construct() 
-    {
-        $this->config = Config::file('database');
-        $this->connect();
-    }
-/**
- * connect
- *
- * @return void
- */
-    public function connect() 
-    {
+    /**
+     * Undocumented variable
+     *
+     * @var [type]
+     */
+        private $pdo; 
+    /**
+     * Undocumented variable
+     *
+     * @var [type]
+     */
+        private $isConnected;
+    /**
+     * Undocumented variable
+     *
+     * @var [type]
+     */
+        private $statement;
+    /**
+     * Undocumented variable
+     *
+     * @var array
+     */
+        private $config = [];
+    /**
+     * Undocumented function
+     *
+     * @param array $config
+     */
+        public function __construct() 
+        {
+            $this->config = Config::file('database');
+            $this->connect();
+        }
+        /**
+         * connect
+         *
+         * @return void
+         */
+        public function connect() 
+        {
 
         $dsn = $this->config['driver']. ":host=". $this->config['host'] .";dbname=". $this->config['db_name'];
     
@@ -71,22 +71,22 @@ class Connection {
         }
         
     }
-/**
- * close
- *
- * @return void
- */
+    /**
+     * close
+     *
+     * @return void
+     */
     public function close() 
     {
         $this->pdo = null;
     }
-/**
- * init
- *
- * @param string $query
- * @param array $params
- * @return void
- */
+    /**
+     * init
+     *
+     * @param string $query
+     * @param array $params
+     * @return void
+     */
     public function execute($sql, $params = []) 
     {
         if (!$this->isConnected) {
@@ -109,14 +109,14 @@ class Connection {
         
     }
 
-/**
- * query
- *
- * @param string $query
- * @param array $params
- * @param [type] $mode
- * @return void
- */
+    /**
+     * query
+     *
+     * @param string $query
+     * @param array $params
+     * @param [type] $mode
+     * @return void
+     */
     public function query($sql, $params = [], $mode = PDO::FETCH_OBJ)
     {
         $sql = trim(str_replace('\r', ' ', $sql));
@@ -130,11 +130,11 @@ class Connection {
 
         $this->close();
     }
-/**
- * lastInsertId
- *
- * @return void
- */
+    /**
+     * lastInsertId
+     *
+     * @return void
+     */
     public function lastInsertId() 
     {
         $this->pdo->lastInsertId();
