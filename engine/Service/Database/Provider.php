@@ -18,11 +18,13 @@ class Provider extends AbstractProvider {
  *
  * @return void
  */
+
     public function init()
     {
         $db = new Connection(); 
-
+        
         $this->di->set($this->serviceName, $db);
+
     }
 }
 

@@ -6,6 +6,7 @@ use Engine\Controller;
 
 class DeveloperController extends Controller 
 {
+    public $data;
     //protected $auth;
     /**
      * consrtuct of controller in the developer entity

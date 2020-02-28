@@ -14,5 +14,7 @@
             "Developer\\": "developer"
         }
     },
-    "require": {}
+    "require": { 
+        "philo/laravel-blade": "3.*"
+    }
 }

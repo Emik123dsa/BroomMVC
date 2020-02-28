@@ -91,6 +91,18 @@ class SqlClaim
         return $this;
     }
     /**
+     * insert into claim mysql database
+     *
+     * @param [type] $table
+     * @return void
+     */
+    public function insert($table) 
+    {
+        $this->reset();
+        $this->sql['insert'] = "INSERT INTO {$table}";
+        return $this;
+    }
+    /**
      * Set for database
      *
      * @param array $data
@@ -105,7 +117,10 @@ class SqlClaim
         {
             foreach($data as $key => $value) 
             {
-                $this->sql['set'] .= "{$key} = ?, "; 
+                $this->sql['set'] .= "{$key} = ? ";
+                if (next($data)) {
+                    $this->sql['set'] .= ", ";
+                } 
                 $this->values[] = $value; 
             }
         }
