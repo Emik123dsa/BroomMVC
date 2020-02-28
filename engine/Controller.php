@@ -51,6 +51,7 @@ abstract class Controller
      *
      * @param DI $di
      */ 
+
     
     public function __construct(DI $di) 
     {
@@ -73,7 +74,7 @@ abstract class Controller
         {
             if ($this->di->has($var)) {
                 
-                $this->{$var} = $this->__get($var);
+                $this->{$var} = $this->di->get($var);
 
             }
         }

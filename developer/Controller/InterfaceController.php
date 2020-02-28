@@ -9,7 +9,7 @@ class InterfaceController extends DeveloperController
     {
         $this->load->model('User'); 
         
-        $this->data['users'] = $this->model->user->getUsers();
+        $this->model->user->getUsers();
 
     }
 
