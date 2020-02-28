@@ -45,16 +45,39 @@ abstract class Controller
      *
      * @param DI $di
      */
-    protected $auth; 
+    protected $auth;
+    /**
+     * model
+     *
+     * @param DI $di
+     */ 
+    
     public function __construct(DI $di) 
     {
         $this->di = $di;
-        $this->db = $this->di->get('db'); 
-        $this->router = $this->di->get('router');
-        $this->view = $this->di->get('view');
-        $this->config = $this->di->get('config');
-        $this->request = $this->di->get('request');
-        $this->auth = $this->di->get('auth');
+            
+        $this->initVars();
+        
+    }
+
+    public function __get($key) 
+    {
+        return $this->di->get($key);
+    }
+
+    public function initVars() 
+    {
+        $vars = array_keys(get_object_vars($this));
+
+        foreach($vars as $var) 
+        {
+            if ($this->di->has($var)) {
+                
+                $this->{$var} = $this->__get($var);
+
+            }
+        }
+        return $this;
     }
 }
 

@@ -18,6 +18,7 @@ try {
         $provider->init();   
     }
 
+
     $cms = new Cms($di);
 
     $cms->run();

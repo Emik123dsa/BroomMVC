@@ -117,7 +117,7 @@ class Connection {
  * @param [type] $mode
  * @return void
  */
-    public function query($sql, $params = [], $mode = PDO::FETCH_ASSOC)
+    public function query($sql, $params = [], $mode = PDO::FETCH_OBJ)
     {
         $sql = trim(str_replace('\r', ' ', $sql));
        

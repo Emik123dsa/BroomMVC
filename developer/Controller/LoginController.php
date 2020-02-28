@@ -3,6 +3,9 @@
 namespace Developer\Controller;
 
 use Engine\Controller;
+use Engine\Core\Database\SqlClaim;
+
+use Developer\Model\User\UserRepository; 
 
 class LoginController extends Controller
 {
@@ -24,11 +27,15 @@ class LoginController extends Controller
     {
         
         $this->view->render('login');
+        
     }
 
     public function loginAjax() 
     {   
-        
+        /**
+         * Example of Ajax for login
+         * $params = $this->requst->post;
+         */
 
     }
 
