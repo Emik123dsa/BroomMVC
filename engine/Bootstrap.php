@@ -2,6 +2,8 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+class_alias('\\Engine\\Core\\Template\\Asset', 'Asset');
+
 include_once 'Function.php';
 
 define('DS', DIRECTORY_SEPARATOR);

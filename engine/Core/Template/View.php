@@ -1,15 +1,17 @@
 <?php 
 
 namespace Engine\Core\Template; 
-
+use Engine\DI\DI;
 use Engine\Core\Template\Theme; 
 
 class View 
 { 
     private $theme; 
 
-    public function __construct()
+    public function __construct(DI $di)
+
     {
+        $this->di = $di;
         $this->theme = new Theme();        
     }
     /**
@@ -23,11 +25,11 @@ class View
     {
        $pathUrl = $this->entityDetermine($template);
 
-       $functions = $this->getThemePath() . DS . 'asset.php'; 
-
+       $functions = $this->getThemePath() . DS . 'Assets/Assets.php'; 
+        
        if (file_exists($functions)) 
        {
-           include $this->getThemePath() . DS . 'asset.php'; 
+           include $this->getThemePath() . DS . 'Assets/Assets.php'; 
        }
 
        if (is_file($pathUrl)) 
@@ -80,7 +82,7 @@ class View
         switch(ENV) 
         {
             case 'Cms': 
-                return ROOT_DIR . DS . 'content/theme/default';
+                return ROOT_DIR . DS . 'content/themes/default';
                 break;
 
             case 'Developer': 

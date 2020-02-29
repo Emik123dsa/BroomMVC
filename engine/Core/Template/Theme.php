@@ -13,7 +13,7 @@ class Theme
     ];
 
     const THEME_MASK = '%s/content/themes/%s'; 
-
+    const THEME_ASSET_MASK = '%s/content/themes/%s/Assets';
     protected static $data = []; 
 
     protected static $url = '';
@@ -49,7 +49,7 @@ class Theme
 
     public function header($template = null) 
     {
-        
+
         $template = (string) $template;
         $template = static::detectNameFile($template, __FUNCTION__); 
 
@@ -86,6 +86,38 @@ class Theme
     {
         return empty(trim($name)) ? $function : sprintf(self::THEME_MASK[$function], $name);
     }
+
+    public static function getAssetPath() 
+    {
+        switch(ENV) 
+        {
+            case 'Developer': 
+                return Config::item('baseUrl', 'main') . DS . mb_strtolower(ENV) . DS . 'Assets';  
+                break;
+            case 'Cms': 
+                return sprintf(self::THEME_ASSET_MASK, Config::item('baseUrl', 'main'), Config::item('defaultTheme', 'main')); 
+                break;
+            default: 
+                return Config::item('baseUrl', 'main');
+            break;
+        }
+    }
+
+    public static function getPathFile() 
+    {
+        switch(ENV) 
+        {
+            case 'Developer': 
+                return ROOT_DIR . DS . mb_strtolower(ENV) . DS . 'Assets';  
+                break;
+            case 'Cms': 
+                return sprintf(self::THEME_ASSET_MASK, ROOT_DIR, Config::item('defaultTheme', 'main')); 
+                break;
+            default: 
+                return ROOT_DIR;
+            break;
+        }
+    }  
 
 
 }
