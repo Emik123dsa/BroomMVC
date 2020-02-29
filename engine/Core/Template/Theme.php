@@ -9,6 +9,7 @@ class Theme
         'footer' => 'footer-%s.php', 
         'sidebar' => 'sidebar-%s.php'
     ];
+    
     const THEME_MASK = '%s/content/themes/%s'; 
 
     protected static $data = []; 
@@ -41,12 +42,12 @@ class Theme
         $template = (string) $template;
 
         $file = sprintf(self::NAME_THEME_RULES['header'], $template);
-        
+
         if ($template == null) {
             $file = 'header.php';
         }
 
-        $templatePath = ROOT_DIR . '/content/themes/default/' . $file; 
+        $templatePath = ROOT_DIR . DS . 'content/themes/default'. DS . $file; 
         
         if (!is_file($templatePath)) 
         {
@@ -67,7 +68,7 @@ class Theme
             $file = 'footer.php';
         }
 
-        $templatePath = ROOT_DIR . '/content/themes/default/' . $file; 
+        $templatePath = ROOT_DIR . DS . 'content/themes/default' . DS . $file; 
         
         if (!is_file($templatePath)) 
         {
@@ -87,7 +88,7 @@ class Theme
             $file = 'sidebar.php';
         }
 
-        $templatePath = ROOT_DIR . '/content/themes/default/' . $file; 
+        $templatePath = ROOT_DIR . DS . 'content/themes/default'. DS . $file; 
         
         if (!is_file($templatePath)) 
         {
@@ -100,7 +101,7 @@ class Theme
     public function blocks($template = null, $vars = []) 
     {
 
-        $templatePath = ROOT_DIR . '/content/themes/default/' . $template . '.php'; 
+        $templatePath = ROOT_DIR . DS . 'content/themes/default' . DS . $template . '.php'; 
         
         if (!is_file($templatePath)) 
         {

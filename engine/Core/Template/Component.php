@@ -6,10 +6,10 @@ class Component
 {
     public static function load($name, $data = []) 
     {
-        $templatePath = ROOT_DIR . '/content/themes/default' . $name. '.php'; 
+        $templatePath = ROOT_DIR . DS . 'content/themes/default' . DS . $name. '.php'; 
 
-        if (ENV == 'Admin') {
-            $templatePath = path('view') . '/' . $name .'.php'; 
+        if (ENV == 'Developer') {
+            $templatePath = path('view') . DS . $name .'.php'; 
         }
 
         if(is_file($templatePath)) 

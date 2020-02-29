@@ -39,7 +39,8 @@ class Connection {
      */
         public function __construct() 
         {
-            $this->config = Config::file('database');
+            $this->config = Config::group('database');
+          
             $this->connect();
         }
         /**
@@ -51,7 +52,7 @@ class Connection {
         {
 
         $dsn = $this->config['driver']. ":host=". $this->config['host'] .";dbname=". $this->config['db_name'];
-    
+            
         try
         { 
         

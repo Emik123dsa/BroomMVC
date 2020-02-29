@@ -22,7 +22,14 @@ class View
     public function render($template, $vars = []) 
     {
        $pathUrl = $this->entityDetermine($template);
-       
+
+       $functions = $this->getThemePath() . DS . 'asset.php'; 
+
+       if (file_exists($functions)) 
+       {
+           include $this->getThemePath() . DS . 'asset.php'; 
+       }
+
        if (is_file($pathUrl)) 
        {
 
@@ -33,7 +40,7 @@ class View
 
        try {
 
-        require $pathUrl; 
+       require $pathUrl; 
         
        } catch (\Exception $e) 
        {
@@ -45,7 +52,7 @@ class View
        echo ob_get_clean();
 
         } else {
-            throw new \Exception(sprintf("This file is not being an available - %s", $template, $pathUrl));
+            throw new \Exception(sprintf("This file is not being an available - %s.php", $template, $pathUrl));
         }
         
     }
@@ -54,18 +61,34 @@ class View
     {
         switch(ENV) {
             case 'Cms': 
-                $entity = ROOT_DIR . '/content/themes/default/' . $template . '.php';
+                $entity = ROOT_DIR . DS . 'content/themes/default' . DS . $template . '.php';
                 return $entity; 
-            break;
-
+                break;
             case 'Developer': 
-                $entity = ROOT_DIR . '/developer/View/' . $template . '.php';
+                $entity = path('view') . DS . $template . '.php';
                 return $entity;
-            break;
+                break;
 
             default: 
-        break;
+                throw new \InvalidArgumentException(sprintf('This entity does not exist -%s', ENV));
+                break;
         }
+    }
+
+    public function getThemePath() 
+    {
+        switch(ENV) 
+        {
+            case 'Cms': 
+                return ROOT_DIR . DS . 'content/theme/default';
+                break;
+
+            case 'Developer': 
+                return path('view');
+                break;
+
+        }
+
     }
 }
 

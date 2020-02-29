@@ -4,25 +4,44 @@ namespace Engine\Core\Config;
 
 class Config 
 {
-    public static function item($key, $group = 'items') 
+    public static function item($key, $group = 'main') 
     {
-        $groupsItems = static::file($group); 
-        return isset($groupsItems[$key]) ? $groupsItems[$key] : [];
+        if(!Repository::retrieve($group, $key)) 
+        {
+            self::file($group);
+        }
+
+        return Repository::retrieve($group, $key);
+
+    }
+
+    public static function group($group) 
+    {
+        if(!Repository::retrieveGroup($group)) 
+        {
+            self::file($group);
+        }
+
+        return Repository::retrieveGroup($group);
     }
 
     public static function file($group) 
     {
-        $path = $_SERVER['DOCUMENT_ROOT'] . '/' . mb_strtolower(ENV) . '/Config/'. $group .'.php'; 
+        $path = path('config') . DS . $group . '.php';
+
 
         if(file_exists($path)) 
         {
-            $items = require  $path;
-             
+            $items = require $path;
+           
             if (is_array($items)) 
             {
+                foreach ($items as $item => $key) 
+                {
+                    Repository::store($group, $item, $key);
+                }
 
-                return $items;
-
+            return true;
             } else {
 
                 throw new \Exception(sprintf('This config file is not being an array format', $path));

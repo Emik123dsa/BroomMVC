@@ -1,7 +1,9 @@
 <?php 
 
 return [
-    'baseURL' => 'http:/localhost/'
+    'baseUrl' => 'http:/localhost/', 
+    'defaultTimezone' => 'America\Chicago', 
+    'defaultTheme'  => 'default'
 ];
 
 ?>

@@ -1,13 +1,16 @@
 <?php 
 
+
 function path($entity) 
 {
-    $templateFile = ROOT_DIR . DS . '%s'; 
+    $templateFile = ROOT_DIR . DS . strtolower(ENV) . DS . '%s'; 
 
     if (ENV == 'Cms') 
     {
         $templateFile = ROOT_DIR . DS . strtolower(ENV) . DS . '%s';
     }
+    
+    $entity = ucfirst($entity); 
 
     switch(strtolower($entity)) 
     {
