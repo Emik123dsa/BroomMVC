@@ -9,7 +9,29 @@
 </head>
 <body>
     <header class="header">
-        Hello
-        <img src="<?php Asset::renderImage('img/hello', 'png') ?>" alt="hello">
+        <div class="dashboard">
+            <div class="container">
+                <div class="dashboard_wrap">
+                    <div class="dashboard_wrap_title">
+                        <h1 class="dashboard_wrap_name">
+                            Welcome to The BroomMVC
+                        </h1>
+                        <!-- /.dashboard_wrap_name -->
+                    </div>
+                    <div class="dashboard_wrap_content">
+                        <div class="dashboard_wrap_content_image">
+                            <img src="<?php Asset::renderImage('img/broom', 'png')?>" alt="Broom" />
+                            <!-- /.dashboard_wrap_content -->
+                        </div>
+                        <!-- /.dashboard_wrap_content_image -->
+                    </div>
+                    <!-- /.dashboard_wrap_title -->
+                </div>
+                <!-- /.dashboard_wrap -->
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /.dashboard -->
+       
     </header>
     <!-- /.header -->

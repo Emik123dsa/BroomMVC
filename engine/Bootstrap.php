@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 class_alias('\\Engine\\Core\\Template\\Asset', 'Asset');
+class_alias('\\Engine\\Helper\\Token', 'Token');
 
 include_once 'Function.php';
 

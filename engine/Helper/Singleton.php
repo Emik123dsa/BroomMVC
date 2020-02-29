@@ -4,6 +4,7 @@ namespace Engine\Helper;
 
 trait Singleton 
 {
+    
     protected static $instance = null; 
 
     private function __consruct() 
@@ -33,9 +34,17 @@ trait Singleton
 
     public static function getInstance() 
     {
-            self::$instance === null ? 
-            self::$instance = new static() : self::$instance;
+            if(!isset(self::$instance)) { 
+
+                self::$instance = new self;
+
+            }
+
+            self::$instance->startSession();
+
+            self::$instance;
     }
+    
 }
 
 ?>
