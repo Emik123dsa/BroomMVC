@@ -6,6 +6,7 @@ use Engine\Controller;
 
 class CmsController extends Controller 
 {
+    public $data;
     /**
      * controller in the entity cms
      *

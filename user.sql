@@ -1,0 +1,16 @@
+CREATE TABLE `user` (
+
+    ->id INT UNSIGNED NOT NULL AUTO_INCREMENT, 
+
+    ->name VARCHAR(55) NOT NULL, 
+
+    ->user VARCHAR(55) NOT NULL, 
+
+    ->password VARCHAR(255) NOT NULL, 
+
+    ->hash VARCHAR(255) NOT NULL DEFAULT 0, 
+
+    ->created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+
+    ->PRIMARY KEY (id)
+);

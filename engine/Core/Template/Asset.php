@@ -12,8 +12,16 @@ class Asset
     const SCSS_MASK = ".scss"; 
     const SASS_MASK = ".sass"; 
 
+    const IMG_MASK  = [
+        'img' => '.img', 
+        'png'   => '.png', 
+        'svg'   => '.svg'
+    ];
+
     const MASK_JS_REPOSITORY = '<script type="text/javascript" src="%s"></script>';
     const MASK_CSS_REPOSITORY = '<link href="%s" type="text/css" rel="stylesheet">'; 
+
+    const MASK_IMAGE_REPOSITORY = '%s';
 
     protected static $container = []; 
 
@@ -71,6 +79,17 @@ class Asset
         {
                 $file = Theme::getAssetPath() . DS . $path . self::CSS_MASK;
                 echo sprintf(self::MASK_CSS_REPOSITORY, $file);
+        }
+    }
+
+    public static function renderImage($path, $mask = 'img') 
+    {
+        $file = Theme::getPathFile() . DS . $path . self::IMG_MASK[$mask];
+        
+        if(is_file($file)) 
+        {
+                $file = Theme::getAssetPath() . DS . $path . self::IMG_MASK[$mask];
+                echo sprintf(self::MASK_IMAGE_REPOSITORY, $file);
         }
     }
 

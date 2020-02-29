@@ -10,5 +10,6 @@
 <body>
     <header class="header">
         Hello
+        <img src="<?php Asset::renderImage('img/hello', 'png') ?>" alt="hello">
     </header>
     <!-- /.header -->
