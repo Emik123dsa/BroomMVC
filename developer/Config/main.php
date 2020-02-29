@@ -2,7 +2,7 @@
 
 return [
     'baseUrl' => 'http:/localhost/', 
-    'defaultTimezone' => 'America\Chicago', 
+    'defaultTimezone' => 'America/Chicago', 
     'defaultTheme'  => 'default'
 ];
 

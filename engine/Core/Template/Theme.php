@@ -2,6 +2,8 @@
 
 namespace Engine\Core\Template; 
 
+use Engine\Core\Config\Config; 
+
 class Theme 
 {
     const NAME_THEME_RULES = [
@@ -9,7 +11,7 @@ class Theme
         'footer' => 'footer-%s.php', 
         'sidebar' => 'sidebar-%s.php'
     ];
-    
+
     const THEME_MASK = '%s/content/themes/%s'; 
 
     protected static $data = []; 
@@ -26,6 +28,15 @@ class Theme
         $this->theme = $this;
     }
 
+    public static function getUrl() 
+    {
+        $currentTheme = Config::item('baseUrl', 'main'); 
+        $currentFile = Config::item('defaultTheme', 'main'); 
+
+        return sprintf(self::THEME_MASK, $currentFile, $currentTheme);
+
+    }
+
     public static function getData() 
     {
         return static::$data;
@@ -38,100 +49,42 @@ class Theme
 
     public function header($template = null) 
     {
-
-        $template = (string) $template;
-
-        $file = sprintf(self::NAME_THEME_RULES['header'], $template);
-
-        if ($template == null) {
-            $file = 'header.php';
-        }
-
-        $templatePath = ROOT_DIR . DS . 'content/themes/default'. DS . $file; 
         
-        if (!is_file($templatePath)) 
-        {
-            throw new \Exception(sprintf('You have to add an header.php file in the directory - %s', $template, $templatePath));
-        }
+        $template = (string) $template;
+        $template = static::detectNameFile($template, __FUNCTION__); 
 
-        $this->loadTemplatePath($templatePath);
+        Component::load($template);
 
     }
 
     public function footer($template = null) 
     {
         $template = (string) $template;
+        $template = static::detectNameFile($template, __FUNCTION__); 
 
-        $file = sprintf(self::NAME_THEME_RULES['footer'], $template);
-        
-        if ($template == null) {
-            $file = 'footer.php';
-        }
-
-        $templatePath = ROOT_DIR . DS . 'content/themes/default' . DS . $file; 
-        
-        if (!is_file($templatePath)) 
-        {
-            throw new \Exception(sprintf('You have to add an header.php file in the directory - %s', $template, $templatePath));
-        }
-
-        $this->loadTemplatePath($templatePath);
+        Component::load($template);
     }
 
     public function sidebar($template = null) 
     {
         $template = (string) $template;
+        $template = static::detectNameFile($template, __FUNCTION__); 
 
-        $file = sprintf(self::NAME_THEME_RULES['sidebar'], $template);
-        
-        if ($template == null) {
-            $file = 'sidebar.php';
-        }
-
-        $templatePath = ROOT_DIR . DS . 'content/themes/default'. DS . $file; 
-        
-        if (!is_file($templatePath)) 
-        {
-            throw new \Exception(sprintf('You have to add an header.php file in the directory - %s', $template, $templatePath));
-        }
-
-        $this->loadTemplatePath($templatePath);
+        Component::load($template);
     }
 
     public function blocks($template = null, $vars = []) 
     {
 
-        $templatePath = ROOT_DIR . DS . 'content/themes/default' . DS . $template . '.php'; 
-        
-        if (!is_file($templatePath)) 
-        {
-            throw new \Exception(sprintf('You have to add an header.php file in the directory - %s', $template, $templatePath));
-        }
+        $template = (string) $template;
+        $template = static::detectNameFile($template, __FUNCTION__); 
 
-        $this->loadTemplatePath($templatePath);
+        Component::load($template, $vars);
     }
 
-    public function loadTemplatePath(string $templatePath, array $vars = []) 
+    public static function detectNameFile($name, $function) 
     {
-        if ($vars != []) {
-            extract($vars);  
-        }
-
-        ob_start(); 
-        ob_implicit_flush(0); 
-
-        try 
-        {
-            require_once $templatePath; 
-
-        } catch (\Exception $e) 
-        {
-            ob_end_clean(); 
-            echo $e->getMessage(); 
-            exit;
-        }
-
-        echo ob_get_clean(); 
+        return empty(trim($name)) ? $function : sprintf(self::THEME_MASK[$function], $name);
     }
 
 
