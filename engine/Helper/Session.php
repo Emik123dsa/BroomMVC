@@ -81,6 +81,8 @@ class Session
         {
             $this->sessionState = !session_destroy();
 
+            unset($_SESSION);
+            
             return !$this->sessionState;
         }
 
