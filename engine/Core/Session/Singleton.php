@@ -1,6 +1,6 @@
 <?php 
 
-namespace Engine\Helper; 
+namespace Engine\Core\Session; 
 
 trait Singleton 
 {

@@ -71,7 +71,7 @@ class Cms {
     {
         try {
 
-        require_once ROOT_DIR. '/' . mb_strtolower(ENV)."/Route.php";
+        require_once ROOT_DIR. DS . mb_strtolower(ENV). DS . "Route.php";
 
         $routerDispatch = $this->router->dispatch(Common::getMethod(), Common::getUrl());
 

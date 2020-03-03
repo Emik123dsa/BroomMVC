@@ -52,7 +52,7 @@ abstract class Controller
      * @param DI $di
      */ 
 
-    
+    protected $session;
     public function __construct(DI $di) 
     {
         $this->di = $di;

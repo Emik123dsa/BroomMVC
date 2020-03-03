@@ -1,6 +1,6 @@
 <?php 
 
-namespace Engine\Helper; 
+namespace Engine\Core\Session; 
 
 class Session 
 {
@@ -75,7 +75,7 @@ class Session
      *
      * @return void
      */
-    public function eliminate() 
+    public function destroy() 
     {
         if($this->sessionState = self::activeSession) 
         {
